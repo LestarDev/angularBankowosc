@@ -2,9 +2,18 @@
     <h2 class="text-center mb-5">Angular Login</h2>
     <div>
       <div>
-        <button type="button" #googleButton (click)="loginWithGoogle()" class="btn btn-danger">Login with Google</button>
-        <div class="" id="google-button"></div>
+        <form action="" (submit)="loginWithoutGoogle(loginI.value, passwordI.value, $event)"  class="form-group">
+          <label class="form-control" for="userLogin">Login: <input #loginI class="form-control" type="text" name="userLogin" id="userLogin"></label>
+          <label class="form-control" for="userPassword">Password: <input  #passwordI class="form-control" type="password" name="userPassword" id="userPassword"></label>
+          <div class="d-flex">
+            <input type="submit" value="Zaloguj" class="form-control">
+            <button [ngStyle]="{'width':'-webkit-fill-available'}" type="button" #googleButton (click)="loginWithGoogle()" class="btn btn-danger">Login with Google</button>
+            <div class="" id="google-button"></div>
+          </div>
+          
+        </form>
       </div>
+      
     </div>
     <div *ngIf="isLoggedin === true">
       <div class="form-group">
