@@ -30,6 +30,7 @@ export class MainPageComponent implements OnInit{
 
   logOut(): void {
     this.socialAuthService.signOut();
+    this.dataFlow.resetUserApp();
     this.router.navigate(['/login'])
   }
 }

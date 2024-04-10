@@ -49,4 +49,14 @@ export class DataFlowService {
 
   getUserApp() {return this.userApp}
 
+  resetUserApp(){
+    this.userApp = {
+      isGoogleUser: false,
+      userService: {authorizationCode: "", authToken: "",email: "", firstName:"", id:"", idToken:"", lastName:"",name:"",photoUrl:"",provider:"",response:""},
+      email: "",
+      name: "",
+      lastname: ""
+    }
+  }
+
 }
