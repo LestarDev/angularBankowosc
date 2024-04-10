@@ -5,11 +5,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavigationStart, Router } from '@angular/router';
 import { Observable, filter } from 'rxjs';
 import { DataFlowService } from '../../service/data-flow.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [CommonModule, SocialLoginModule],
+  imports: [CommonModule, SocialLoginModule, HttpClientModule],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
@@ -20,11 +22,13 @@ export class LoginPageComponent implements OnInit {
   @Output() showLoginEmmiter = new EventEmitter<boolean>();
   @ViewChild('googleButton') googleButton: ElementRef = new ElementRef({});
   navStart: Observable<NavigationStart>;
+  apiLink: string = "https://dummyjson.com/users/filter?key=password&value=";
   constructor(
     private formBuilder: FormBuilder,
     private socialAuthService: SocialAuthService,
     public router: Router,
-    public dataFlow: DataFlowService
+    public dataFlow: DataFlowService,
+    private http: HttpClient
   ) {
     this.navStart = router.events.pipe(
       filter(evt => evt instanceof NavigationStart)
@@ -32,7 +36,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataFlow.setUserApp(true)
+    // this.dataFlow.setUserApp(true)
     this.navStart.subscribe(()=> console.log("Sub on"))
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
@@ -42,7 +46,7 @@ export class LoginPageComponent implements OnInit {
       this.socialUser = user;
       this.isLoggedin = user != null;
       console.log(this.socialUser);
-      this.dataFlow.setUserApp(true, user);
+      this.dataFlow.setUserWithGoogle(user);
       this.router.navigate(['/loged'])
     });
     
@@ -67,6 +71,15 @@ export class LoginPageComponent implements OnInit {
   loginWithoutGoogle(login: string, password: string, e: Event): void{
     e.preventDefault();
     
+    this.http.get(this.apiLink+password).subscribe((data: any)=>{
+      const user = data.users[0];
+      if(!user) return;
+      this.dataFlow.setUserWithoutGoogle(user.email, user.firstName, user.maidenName);
+      this.router.navigate(['/loged']);
+    });
+
+    
+
   }
 
 }
