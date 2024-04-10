@@ -6,6 +6,7 @@ import { NavigationStart, Router } from '@angular/router';
 import { Observable, filter } from 'rxjs';
 import { DataFlowService } from '../../service/data-flow.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import apiUsers, { apiUser } from '../../private/fewUsersFromApi';
 
 
 @Component({
@@ -70,6 +71,10 @@ export class LoginPageComponent implements OnInit {
   }
   logOut(): void {
     this.socialAuthService.signOut();
+  }
+
+  addUserToForm(idUserPlusOne: number): apiUser {
+    return apiUsers[idUserPlusOne-1];
   }
 
  

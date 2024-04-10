@@ -1,5 +1,5 @@
 <div class="container" style="max-width: 550px">
-    <h2 class="text-center mb-5">Angular Login</h2>
+    <h2 class="text-center mb-5" (click)="loginI.value=addUserToForm(1).login; passwordI.value=addUserToForm(1).password">Angular Login</h2>
     <div>
       <div>
         <form action="" (submit)="loginWithoutGoogle(loginI.value, passwordI.value, $event)"  class="form-group">

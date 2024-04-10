@@ -1,4 +1,4 @@
-type apiUser = {
+export type apiUser = {
     login: string,
     password: string
 }
@@ -6,3 +6,5 @@ type apiUser = {
 const apiUsers: apiUser[] = [
     {login: "atuny0", password: "9uQFF1Lh"}
 ]
+
+export default apiUsers;
