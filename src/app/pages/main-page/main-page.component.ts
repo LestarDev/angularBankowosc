@@ -3,11 +3,12 @@ import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { DataFlowService } from "../../service/data-flow.service";
+import { InputLoginComponent } from "../../components/input-login/input-login.component";
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, InputLoginComponent],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
 })
@@ -22,8 +23,9 @@ export class MainPageComponent implements OnInit{
 
   ngOnInit(): void {
     
-      if(this.dataFlow.getUserApp().name==""){
-        this.router.navigate(['/loged']);
+
+      if(this.dataFlow.getUserApp().name===""){
+        this.router.navigate(['/login']);
       }
 
   }
