@@ -22,7 +22,8 @@ export class LoginPageComponent implements OnInit {
   @Output() showLoginEmmiter = new EventEmitter<boolean>();
   @ViewChild('googleButton') googleButton: ElementRef = new ElementRef({});
   navStart: Observable<NavigationStart>;
-  apiLink: string = "https://dummyjson.com/users/filter?key=password&value=";
+  apiLink: string = "https://dummyjson.com/users/";
+  apiLinkPassword: string = "filter?key=password&value=";
   constructor(
     private formBuilder: FormBuilder,
     private socialAuthService: SocialAuthService,
@@ -71,10 +72,12 @@ export class LoginPageComponent implements OnInit {
   loginWithoutGoogle(login: string, password: string, e: Event): void{
     e.preventDefault();
     
-    this.http.get(this.apiLink+password).subscribe((data: any)=>{
+    this.http.get(this.apiLink+this.apiLinkPassword+password).subscribe((data: any)=>{
       const user = data.users[0];
       if(!user) return;
+      if(user.username!=login) return;
       this.dataFlow.setUserWithoutGoogle(user.email, user.firstName, user.maidenName);
+      console.log(user);
       this.router.navigate(['/loged']);
     });
 

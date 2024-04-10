@@ -22,6 +22,9 @@ export class MainPageComponent implements OnInit{
 
   ngOnInit(): void {
     
+      if(this.dataFlow.getUserApp().name==""){
+        this.router.navigate(['/loged']);
+      }
 
   }
 
