@@ -21,14 +21,7 @@ export class MainPageComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    console.log(this.dataFlow.getUserApp().userService);
-    if(this.dataFlow.getUserApp().userService.id == "") {
-      // console.log(this.isLoggedin)
-     this.logOut();
-    }
-    if(this.dataFlow.getUserApp().userService.id != ""){
-      this.socialUser = this.dataFlow.getUserApp().userService
-    }
+    
 
   }
 
