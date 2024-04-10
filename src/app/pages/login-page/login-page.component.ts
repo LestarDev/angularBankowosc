@@ -24,6 +24,7 @@ export class LoginPageComponent implements OnInit {
   navStart: Observable<NavigationStart>;
   apiLink: string = "https://dummyjson.com/users/";
   apiLinkPassword: string = "filter?key=password&value=";
+  isInvalidForm: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private socialAuthService: SocialAuthService,
@@ -53,7 +54,10 @@ export class LoginPageComponent implements OnInit {
     
   }
 
-
+  invalidForm(): void{
+    this.isInvalidForm=true;
+    this.router.navigate(['/login']);
+  }
 
   loginWithGoogle(): void {
     // this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
@@ -74,8 +78,9 @@ export class LoginPageComponent implements OnInit {
     
     this.http.get(this.apiLink+this.apiLinkPassword+password).subscribe((data: any)=>{
       const user = data.users[0];
-      if(!user) return;
-      if(user.username!=login) return;
+      if(!user) {this.invalidForm(); return};
+      if(user.username!=login) {this.invalidForm(); return};
+      this.isInvalidForm=false;
       this.dataFlow.setUserWithoutGoogle(user.email, user.firstName, user.maidenName);
       console.log(user);
       this.router.navigate(['/loged']);
