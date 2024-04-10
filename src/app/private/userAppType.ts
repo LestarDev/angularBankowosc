@@ -5,7 +5,8 @@ type userAppType = {
     userService: SocialUser,
     name: string,
     lastname: string,
-    email: string
+    email: string,
+    imgLink: string
 }
 
 export default userAppType

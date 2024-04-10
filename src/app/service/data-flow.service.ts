@@ -14,7 +14,8 @@ export class DataFlowService {
     userService: {authorizationCode: "", authToken: "",email: "", firstName:"", id:"", idToken:"", lastName:"",name:"",photoUrl:"",provider:"",response:""},
     email: "",
     name: "",
-    lastname: ""
+    lastname: "",
+    imgLink: ""
   }
 
   constructor() { 
@@ -32,22 +33,26 @@ export class DataFlowService {
           userService: newUserService,
           email: newUserService.email,
           name: newUserService.firstName,
-          lastname: newUserService.lastName
+          lastname: newUserService.lastName,
+          imgLink: newUserService.photoUrl
         }
       
   }
 
-  setUserWithoutGoogle(newEmail: string, newName: string, newLastName: string){
+  setUserWithoutGoogle(newEmail: string, newName: string, newLastName: string, newImgLink: string){
     this.userApp = {
       isGoogleUser: false,
       userService: simpleSocialUserNotUse,
       name: newName,
       lastname: newLastName,
-      email: newEmail
+      email: newEmail,
+      imgLink: newImgLink
     }
   }
 
-  getUserApp() {return this.userApp}
+  getUserApp() {
+    return this.userApp;
+  }
 
   resetUserApp(){
     this.userApp = {
@@ -55,7 +60,8 @@ export class DataFlowService {
       userService: {authorizationCode: "", authToken: "",email: "", firstName:"", id:"", idToken:"", lastName:"",name:"",photoUrl:"",provider:"",response:""},
       email: "",
       name: "",
-      lastname: ""
+      lastname: "",
+      imgLink: ""
     }
   }
 
