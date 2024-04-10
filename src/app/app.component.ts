@@ -21,7 +21,7 @@ export class AppComponent {
   loginWithGoogle(componentRef:any){
     if(!(componentRef instanceof LoginPageComponent)) return;
     const comRef : LoginPageComponent = componentRef;
-    console.log("yyyyyyy");
+    // console.log("yyyyyyy");
     
   }
 

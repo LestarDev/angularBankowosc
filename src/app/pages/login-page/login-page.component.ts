@@ -48,7 +48,7 @@ export class LoginPageComponent implements OnInit {
     this.socialAuthService.authState.subscribe((user) => {
       this.socialUser = user;
       this.isLoggedin = user != null;
-      // console.log(this.socialUser);
+      console.log(this.socialUser);
       if(this.dataFlow.getUserApp().name==""){
         this.dataFlow.setUserWithGoogle(user);
         this.router.navigate(['/loged'])
