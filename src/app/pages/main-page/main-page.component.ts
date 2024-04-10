@@ -1,4 +1,4 @@
-import { SocialAuthService, SocialUser } from "@abacritt/angularx-social-login";
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from "@abacritt/angularx-social-login";
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -31,8 +31,14 @@ export class MainPageComponent implements OnInit{
   }
 
   logOut(): void {
-    this.socialAuthService.signOut();
+    
     this.dataFlow.resetUserApp();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']).then(()=>{
+      this.socialAuthService.signOut()
+      this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID).then(()=>{this.router.navigate(['/login'])})
+    });
+    
+    
+
   }
 }

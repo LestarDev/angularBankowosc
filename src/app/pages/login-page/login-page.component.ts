@@ -48,9 +48,12 @@ export class LoginPageComponent implements OnInit {
     this.socialAuthService.authState.subscribe((user) => {
       this.socialUser = user;
       this.isLoggedin = user != null;
-      console.log(this.socialUser);
-      this.dataFlow.setUserWithGoogle(user);
-      this.router.navigate(['/loged'])
+      // console.log(this.socialUser);
+      if(this.dataFlow.getUserApp().name==""){
+        this.dataFlow.setUserWithGoogle(user);
+        this.router.navigate(['/loged'])
+      }
+      
     });
     
   }
@@ -87,7 +90,7 @@ export class LoginPageComponent implements OnInit {
       if(user.username!=login) {this.invalidForm(); return};
       this.isInvalidForm=false;
       this.dataFlow.setUserWithoutGoogle(user.email, user.firstName, user.maidenName, user.image);
-      console.log(user);
+      // console.log(user);
       this.router.navigate(['/loged']);
     });
 
