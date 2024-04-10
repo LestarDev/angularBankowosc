@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import userAppType from '../private/userAppType';
+import userAppType, { simpleSocialUserNotUse } from '../private/userAppType';
 import { SocialUser } from '@abacritt/angularx-social-login';
 
 @Injectable({
@@ -11,7 +11,10 @@ export class DataFlowService {
 
   userApp: userAppType = {
     isGoogleUser: false,
-    userService: {authorizationCode: "", authToken: "",email: "", firstName:"", id:"", idToken:"", lastName:"",name:"",photoUrl:"",provider:"",response:""}
+    userService: {authorizationCode: "", authToken: "",email: "", firstName:"", id:"", idToken:"", lastName:"",name:"",photoUrl:"",provider:"",response:""},
+    email: "",
+    name: "",
+    lastname: ""
   }
 
   constructor() { 
@@ -22,19 +25,25 @@ export class DataFlowService {
 
   setOkeyLogedIn(v: boolean) {this.okeyLogedIn=v}
 
-  setUserApp(newUserApp: userAppType | boolean, newUserService?: SocialUser) {
-    if(typeof newUserApp == 'boolean'){
-      if(newUserService == null){
-        console.log("[Error] Data Flow => newUserService at setUserApp doesn't exist");
-      }else{
-        console.log("[Info] Set userApp correctly")
+  setUserWithGoogle(newUserService: SocialUser) {
+   
         this.userApp = {
-          isGoogleUser: newUserApp,
-          userService: newUserService
+          isGoogleUser: true,
+          userService: newUserService,
+          email: newUserService.email,
+          name: newUserService.firstName,
+          lastname: newUserService.lastName
         }
-      }
-    }else{
-      this.userApp = newUserApp;
+      
+  }
+
+  setUserWithoutGoogle(newEmail: string, newName: string, newLastName: string){
+    this.userApp = {
+      isGoogleUser: false,
+      userService: simpleSocialUserNotUse,
+      name: newName,
+      lastname: newLastName,
+      email: newEmail
     }
   }
 

@@ -2,7 +2,12 @@ import { SocialUser } from "@abacritt/angularx-social-login"
 
 type userAppType = {
     isGoogleUser: boolean,
-    userService: SocialUser
+    userService: SocialUser,
+    name: string,
+    lastname: string,
+    email: string
 }
 
 export default userAppType
+
+export const simpleSocialUserNotUse = {authorizationCode: "", authToken: "",email: "", firstName:"", id:"", idToken:"", lastName:"",name:"",photoUrl:"",provider:"",response:""}
