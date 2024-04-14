@@ -30,11 +30,17 @@
     <app-form-reviews (newReviewEmitter)="addReview($event)" />
     <div class="w-100">
       <div *ngFor="let singleReview of listOfReviews; let iNx = index" class="rounded mx-2 my-2 border border-dark px-2 py-2 w-100">
-        <div class="d-flex justify-content-between">
-          <span>{{singleReview.byWho}}</span><div>{{singleReview.rate / 2}}/5</div>
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="fw-bolder">{{singleReview.byWho}}</span>
+          <div>
+            <div *ngFor="let starDataX of showStarsX(singleReview.rate); let iNxY = index;">
+              <!-- <fa-icon [icon]="{{fullStar}}"></fa-icon> -->
+              <fa-icon [icon]="starDataX.star"></fa-icon>
+            </div>
+          </div>
         </div>
-        <div>{{singleReview.data}}</div>
-        <span>{{singleReview.date}}</span>
+        <div class="my-2">{{singleReview.data}}</div>
+        <span class="mt-2">{{singleReview.date}}</span>
       </div>
     </div>
   </div>

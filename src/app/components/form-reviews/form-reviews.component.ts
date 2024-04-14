@@ -58,7 +58,7 @@ export class FormReviewsComponent {
 
     this.rationInt = (ration as unknown) as number;
 
-    this.review.rate=this.rationInt;
+    // this.review.rate=this.rationInt;
 
     for(let i=1; i<=5; i++){
       if(this.rationInt>0){
@@ -96,15 +96,18 @@ export class FormReviewsComponent {
     
     
 
-    console.log(this.starsToShow);
 
   }
 
 
-  sendUpper(textReview: string, e: Event){
+  sendUpper(textReview: string, rateReview: string, e: Event){
     e.preventDefault();
     this.review.data=textReview;
-    console.log(this.review)
+
+    const rateReviewInt = (rateReview as unknown) as number
+
+    this.review.rate=rateReviewInt;
+    // console.log(this.review)
 
     this.newReviewEmitter.emit(this.review);
 

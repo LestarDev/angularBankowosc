@@ -5,12 +5,15 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { DataFlowService } from "../../service/data-flow.service";
 import { InputLoginComponent } from "../../components/input-login/input-login.component";
 import { FormReviewsComponent } from "../../components/form-reviews/form-reviews.component";
-import reviewType from "../../private/reviewType";
+import reviewType, { starType } from "../../private/reviewType";
+import { faStar, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [CommonModule, InputLoginComponent, FormReviewsComponent],
+  imports: [CommonModule, InputLoginComponent, FormReviewsComponent, FontAwesomeModule],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
 })
@@ -24,6 +27,15 @@ export class MainPageComponent implements OnInit{
   ) {}
 
   listOfReviews: reviewType[] = [];
+
+  fullStar = faStar
+  // spaceStar: string ="<i class='fa-regular fa-star'></i>";
+  spaceStar = faStarRegular
+  // halfStar: string = "<i class='fa-solid fa-star-half-stroke'></i>";
+  halfStar = faStarHalfStroke;
+
+  rememberIshalf = {isHalf: false, indexhalf: 0};
+  
 
   ngOnInit(): void {
     
@@ -46,6 +58,51 @@ export class MainPageComponent implements OnInit{
 
   addReview(newReview: reviewType){
     this.listOfReviews.push(newReview);
+  }
+
+  showStarsX(rationInt: number): starType[]{
+
+    console.log(this.listOfReviews);
+
+    this.rememberIshalf.isHalf=false;
+    
+    const starsToShowX = [];
+
+    for(let i=1; i<=5; i++){
+      if(rationInt>0){
+        if(rationInt%2 ==0){
+          rationInt-=2;
+          starsToShowX.push({
+            star: this.fullStar,
+            index: i
+          });
+        }else{
+          rationInt-=1;
+          this.rememberIshalf.isHalf=true;
+          this.rememberIshalf.indexhalf=i;
+          i--;
+        }
+      }else{
+
+        if(this.rememberIshalf.isHalf){
+          starsToShowX.push({
+            star: this.halfStar,
+            index: this.rememberIshalf.indexhalf
+          });
+          this.rememberIshalf.isHalf=false;
+        }else{
+          starsToShowX.push({
+            star: this.spaceStar,
+            index: i
+          });
+        }
+
+        
+      }
+    }
+
+    return starsToShowX;
+
   }
 
 
