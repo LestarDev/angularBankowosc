@@ -4,11 +4,12 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { DataFlowService } from "../../service/data-flow.service";
 import { InputLoginComponent } from "../../components/input-login/input-login.component";
+import { FormReviewsComponent } from "../../components/form-reviews/form-reviews.component";
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [CommonModule, InputLoginComponent],
+  imports: [CommonModule, InputLoginComponent, FormReviewsComponent],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
 })

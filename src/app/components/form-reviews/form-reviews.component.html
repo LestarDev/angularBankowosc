@@ -1,0 +1,17 @@
+<form class="form-group w-50 mt-5">
+    <textarea class="form-control" id="w3review" name="w3review" rows="4" cols="50" placeholder="Opinia: "></textarea>
+    <label class="form-control" for="starsReview">
+        Oceń: 
+        <div class="d-flex">
+            <input #rangeStars (change)="showStars(showStarsHere, rangeStars.value)" class="form-control" type="range" name="starsReview" id="starsReview" min="0" max="10">
+            <div #showStarsHere class="d-flex">
+                <div *ngFor="let starData of starsToShow; let iNx = index;">
+                    <!-- <fa-icon [icon]="{{fullStar}}"></fa-icon> -->
+                    <fa-icon [icon]="starData.star"></fa-icon>
+                </div>
+                
+            </div>
+        </div>
+        
+    </label>
+</form>
