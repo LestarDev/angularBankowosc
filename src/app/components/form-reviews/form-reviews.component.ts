@@ -105,7 +105,7 @@ export class FormReviewsComponent {
       date: this.todayDate
     }
 
-    review.data=textReview;
+    review.data=textReview.replace("\n", "<br/>");
 
     const rateReviewInt = (rateReview as unknown) as number
 
