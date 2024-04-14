@@ -3,8 +3,9 @@ import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
-import { starType } from '../../private/reviewType';
+import reviewType, { starType } from '../../private/reviewType';
 import "./form-reviews.component.css"
+import { DataFlowService } from '../../service/data-flow.service';
 
 @Component({
   selector: 'app-form-reviews',
@@ -15,6 +16,8 @@ import "./form-reviews.component.css"
 })
 export class FormReviewsComponent {
 
+  constructor(public dataFlow: DataFlowService,){}
+
   // fullStar ="<i class='fa-solid fa-star'></i>";
   fullStar = faStar
   // spaceStar: string ="<i class='fa-regular fa-star'></i>";
@@ -22,6 +25,13 @@ export class FormReviewsComponent {
   // halfStar: string = "<i class='fa-solid fa-star-half-stroke'></i>";
   halfStar = faStarHalfStroke;
   rationInt: number = 10;
+
+  review: reviewType = {
+    byWho: this.dataFlow.getUserApp().name+" "+this.dataFlow.getUserApp().lastname,
+    data: "",
+    idWho: this.dataFlow.getUserApp().id,
+    rate: 10
+  }
 
   rememberIshalf = {isHalf: false, indexhalf: 0};
 
@@ -32,6 +42,10 @@ export class FormReviewsComponent {
     {star: this.fullStar, index: 4},
     {star: this.fullStar, index: 5},
   ];
+
+  setReviewer(){
+
+  }
 
   showStars(divEl: HTMLDivElement, ration: string){
 
@@ -78,6 +92,11 @@ export class FormReviewsComponent {
     
 
     console.log(this.starsToShow);
+
+  }
+
+
+  sendUpper(){
 
   }
 

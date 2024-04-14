@@ -15,7 +15,8 @@ export class DataFlowService {
     email: "",
     name: "",
     lastname: "",
-    imgLink: ""
+    imgLink: "",
+    id: ""
   }
 
   constructor() { 
@@ -34,19 +35,21 @@ export class DataFlowService {
           email: newUserService.email,
           name: newUserService.firstName,
           lastname: newUserService.lastName,
-          imgLink: newUserService.photoUrl
+          imgLink: newUserService.photoUrl,
+          id: newUserService.id
         }
       
   }
 
-  setUserWithoutGoogle(newEmail: string, newName: string, newLastName: string, newImgLink: string){
+  setUserWithoutGoogle(newEmail: string, newName: string, newLastName: string, newImgLink: string, newId: string){
     this.userApp = {
       isGoogleUser: false,
       userService: simpleSocialUserNotUse,
       name: newName,
       lastname: newLastName,
       email: newEmail,
-      imgLink: newImgLink
+      imgLink: newImgLink,
+      id: newId
     }
   }
 
@@ -61,7 +64,8 @@ export class DataFlowService {
       email: "",
       name: "",
       lastname: "",
-      imgLink: ""
+      imgLink: "",
+      id: ""
     }
   }
 

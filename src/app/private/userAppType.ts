@@ -6,7 +6,8 @@ type userAppType = {
     name: string,
     lastname: string,
     email: string,
-    imgLink: string
+    imgLink: string,
+    id: string
 }
 
 export default userAppType
