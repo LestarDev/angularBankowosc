@@ -32,13 +32,7 @@ export class FormReviewsComponent {
   todayDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   // todayDate="";
 
-  review: reviewType = {
-    byWho: this.dataFlow.getUserApp().name+" "+this.dataFlow.getUserApp().lastname,
-    data: "",
-    idWho: this.dataFlow.getUserApp().id,
-    rate: 10,
-    date: this.todayDate
-  }
+  
 
   rememberIshalf = {isHalf: false, indexhalf: 0};
 
@@ -102,14 +96,23 @@ export class FormReviewsComponent {
 
   sendUpper(textReview: string, rateReview: string, e: Event){
     e.preventDefault();
-    this.review.data=textReview;
+
+    const review: reviewType = {
+      byWho: this.dataFlow.getUserApp().name+" "+this.dataFlow.getUserApp().lastname,
+      data: "",
+      idWho: this.dataFlow.getUserApp().id,
+      rate: 10,
+      date: this.todayDate
+    }
+
+    review.data=textReview;
 
     const rateReviewInt = (rateReview as unknown) as number
 
-    this.review.rate=rateReviewInt;
+    review.rate=rateReviewInt;
     // console.log(this.review)
 
-    this.newReviewEmitter.emit(this.review);
+    this.newReviewEmitter.emit(review);
 
   }
 

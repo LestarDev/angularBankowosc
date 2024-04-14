@@ -7,8 +7,6 @@ import { SocialUser } from '@abacritt/angularx-social-login';
 })
 export class DataFlowService {
 
-  okeyLogedIn: boolean = false;
-
   userApp: userAppType = {
     isGoogleUser: false,
     userService: {authorizationCode: "", authToken: "",email: "", firstName:"", id:"", idToken:"", lastName:"",name:"",photoUrl:"",provider:"",response:""},
@@ -22,10 +20,6 @@ export class DataFlowService {
   constructor() { 
     
   }
-
-  getOkeyLogedIn() {return this.okeyLogedIn}
-
-  setOkeyLogedIn(v: boolean) {this.okeyLogedIn=v}
 
   setUserWithGoogle(newUserService: SocialUser) {
    

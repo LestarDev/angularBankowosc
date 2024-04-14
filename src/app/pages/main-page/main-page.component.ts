@@ -6,7 +6,7 @@ import { DataFlowService } from "../../service/data-flow.service";
 import { InputLoginComponent } from "../../components/input-login/input-login.component";
 import { FormReviewsComponent } from "../../components/form-reviews/form-reviews.component";
 import reviewType, { starType } from "../../private/reviewType";
-import { faStar, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faStarHalfStroke, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
@@ -28,13 +28,15 @@ export class MainPageComponent implements OnInit{
 
   listOfReviews: reviewType[] = [];
 
-  fullStar = faStar
+  fullStar = faStar;
   // spaceStar: string ="<i class='fa-regular fa-star'></i>";
-  spaceStar = faStarRegular
+  spaceStar = faStarRegular;
   // halfStar: string = "<i class='fa-solid fa-star-half-stroke'></i>";
   halfStar = faStarHalfStroke;
 
   rememberIshalf = {isHalf: false, indexhalf: 0};
+
+  xMark = faXmark;
   
 
   ngOnInit(): void {
@@ -43,6 +45,12 @@ export class MainPageComponent implements OnInit{
       if(this.dataFlow.getUserApp().name===""){
         this.router.navigate(['/login']);
       }
+
+      if(localStorage.getItem("listOfReviews")){
+        this.listOfReviews = JSON.parse(localStorage.getItem("listOfReviews") as any)
+      }
+
+      
 
   }
 
@@ -57,12 +65,13 @@ export class MainPageComponent implements OnInit{
   }
 
   addReview(newReview: reviewType){
+    
     this.listOfReviews.push(newReview);
+    localStorage.setItem("listOfReviews",JSON.stringify(this.listOfReviews as any));
   }
 
   showStarsX(rationInt: number): starType[]{
 
-    console.log(this.listOfReviews);
 
     this.rememberIshalf.isHalf=false;
     
@@ -103,6 +112,10 @@ export class MainPageComponent implements OnInit{
 
     return starsToShowX;
 
+  }
+
+  deleteReview(revirewToDel: reviewType,revIndex: number){
+    console.log(revIndex);
   }
 
 
