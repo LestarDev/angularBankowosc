@@ -26,6 +26,18 @@
 
   <button type="button" (click)="logOut()" [ngClass]="this.dataFlow.getUserApp().isGoogleUser ? 'btn-outline-primary' : 'btn-outline-secondary' " class="btn">Log Out</button>
 
-  <app-form-reviews />
+  <div class="d-flex">
+    <app-form-reviews (newReviewEmitter)="addReview($event)" />
+    <div class="w-100">
+      <div *ngFor="let singleReview of listOfReviews; let iNx = index" class="rounded mx-2 my-2 border border-dark px-2 py-2 w-100">
+        <div class="d-flex justify-content-between">
+          <span>{{singleReview.byWho}}</span><div>{{singleReview.rate / 2}}/5</div>
+        </div>
+        <div>{{singleReview.data}}</div>
+        <span>{{singleReview.date}}</span>
+      </div>
+    </div>
+  </div>
+
   
 </div>

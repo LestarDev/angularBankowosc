@@ -1,5 +1,5 @@
-import { CommonModule, NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, DatePipe, NgFor } from '@angular/common';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStar, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
@@ -11,12 +11,15 @@ import { DataFlowService } from '../../service/data-flow.service';
   selector: 'app-form-reviews',
   standalone: true,
   imports: [FontAwesomeModule, NgFor],
+  providers: [DatePipe],
   templateUrl: './form-reviews.component.html',
   styleUrl: './form-reviews.component.css'
 })
 export class FormReviewsComponent {
 
-  constructor(public dataFlow: DataFlowService,){}
+  @Output() newReviewEmitter =  new EventEmitter<reviewType>();
+
+  constructor(public dataFlow: DataFlowService,private datePipe: DatePipe){}
 
   // fullStar ="<i class='fa-solid fa-star'></i>";
   fullStar = faStar
@@ -26,11 +29,15 @@ export class FormReviewsComponent {
   halfStar = faStarHalfStroke;
   rationInt: number = 10;
 
+  todayDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  // todayDate="";
+
   review: reviewType = {
     byWho: this.dataFlow.getUserApp().name+" "+this.dataFlow.getUserApp().lastname,
     data: "",
     idWho: this.dataFlow.getUserApp().id,
-    rate: 10
+    rate: 10,
+    date: this.todayDate
   }
 
   rememberIshalf = {isHalf: false, indexhalf: 0};
@@ -43,10 +50,6 @@ export class FormReviewsComponent {
     {star: this.fullStar, index: 5},
   ];
 
-  setReviewer(){
-
-  }
-
   showStars(divEl: HTMLDivElement, ration: string){
 
     this.rememberIshalf.isHalf=false;
@@ -54,6 +57,8 @@ export class FormReviewsComponent {
     this.starsToShow = [];
 
     this.rationInt = (ration as unknown) as number;
+
+    this.review.rate=this.rationInt;
 
     for(let i=1; i<=5; i++){
       if(this.rationInt>0){
@@ -96,7 +101,12 @@ export class FormReviewsComponent {
   }
 
 
-  sendUpper(){
+  sendUpper(textReview: string, e: Event){
+    e.preventDefault();
+    this.review.data=textReview;
+    console.log(this.review)
+
+    this.newReviewEmitter.emit(this.review);
 
   }
 

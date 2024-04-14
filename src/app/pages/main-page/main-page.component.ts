@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { DataFlowService } from "../../service/data-flow.service";
 import { InputLoginComponent } from "../../components/input-login/input-login.component";
 import { FormReviewsComponent } from "../../components/form-reviews/form-reviews.component";
+import reviewType from "../../private/reviewType";
 
 @Component({
   selector: 'app-main-page',
@@ -22,6 +23,8 @@ export class MainPageComponent implements OnInit{
     public dataFlow: DataFlowService
   ) {}
 
+  listOfReviews: reviewType[] = [];
+
   ngOnInit(): void {
     
 
@@ -38,8 +41,12 @@ export class MainPageComponent implements OnInit{
       this.socialAuthService.signOut()
       this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID).then(()=>{this.router.navigate(['/login'])})
     });
-    
-    
 
   }
+
+  addReview(newReview: reviewType){
+    this.listOfReviews.push(newReview);
+  }
+
+
 }

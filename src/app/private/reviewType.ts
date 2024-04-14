@@ -8,7 +8,8 @@ type reviewType = {
     data: string,
     rate: number,
     byWho: string,
-    idWho: string
+    idWho: string,
+    date: string | null
 }
 
 export default reviewType
