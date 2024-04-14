@@ -116,6 +116,13 @@ export class MainPageComponent implements OnInit{
 
   deleteReview(revirewToDel: reviewType,revIndex: number){
     console.log(revIndex);
+
+
+    this.listOfReviews.splice(revIndex,1);
+    console.log(this.listOfReviews);
+    localStorage.removeItem("listOfReviews");
+    localStorage.setItem("listOfReviews",JSON.stringify(this.listOfReviews as any));
+
   }
 
 
