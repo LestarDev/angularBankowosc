@@ -22,6 +22,8 @@ export class FormReviewsComponent {
   halfStar = faStarHalfStroke;
   rationInt: number = 10;
 
+  rememberIshalf = {isHalf: false, indexhalf: 0};
+
   starsToShow: starType[] = [
     {star: this.fullStar, index: 1},
     {star: this.fullStar, index: 2},
@@ -31,6 +33,8 @@ export class FormReviewsComponent {
   ];
 
   showStars(divEl: HTMLDivElement, ration: string){
+
+    this.rememberIshalf.isHalf=false;
     
     this.starsToShow = [];
 
@@ -46,18 +50,31 @@ export class FormReviewsComponent {
           });
         }else{
           this.rationInt-=1;
+          this.rememberIshalf.isHalf=true;
+          this.rememberIshalf.indexhalf=i;
+          i--;
+        }
+      }else{
+
+        if(this.rememberIshalf.isHalf){
           this.starsToShow.push({
             star: this.halfStar,
+            index: this.rememberIshalf.indexhalf
+          });
+          this.rememberIshalf.isHalf=false;
+        }else{
+          this.starsToShow.push({
+            star: this.spaceStar,
             index: i
           });
         }
-      }else{
-        this.starsToShow.push({
-          star: this.spaceStar,
-          index: i
-        });
+
+        
       }
     }
+
+    
+    
 
     console.log(this.starsToShow);
 
