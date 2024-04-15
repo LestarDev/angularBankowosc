@@ -9,11 +9,15 @@ import reviewType, { starType } from "../../private/reviewType";
 import { faStar, faStarHalfStroke, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import reviewsDataBase from "../../private/reviews.json";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { writeFileSync } from "fs";
+import { UUID } from "crypto";
 
 @Component({
   selector: 'app-main-page',
   standalone: true,
-  imports: [CommonModule, InputLoginComponent, FormReviewsComponent, FontAwesomeModule],
+  imports: [CommonModule, InputLoginComponent, FormReviewsComponent, FontAwesomeModule, HttpClientModule],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
 })
@@ -23,7 +27,8 @@ export class MainPageComponent implements OnInit{
     public router: Router,
     private socialAuthService: SocialAuthService,
     private activedRoute: ActivatedRoute,
-    public dataFlow: DataFlowService
+    public dataFlow: DataFlowService,
+    private http: HttpClient
   ) {}
 
   listOfReviews: reviewType[] = [];
@@ -46,11 +51,11 @@ export class MainPageComponent implements OnInit{
         this.router.navigate(['/login']);
       }
 
-      if(localStorage.getItem("listOfReviews")){
-        this.listOfReviews = JSON.parse(localStorage.getItem("listOfReviews") as any)
-      }
+      // if(localStorage.getItem("listOfReviews")){
+      //   this.listOfReviews = JSON.parse(localStorage.getItem("listOfReviews") as any)
+      // }
 
-      
+      this.listOfReviews=JSON.parse(JSON.stringify((reviewsDataBase as any).reviews));
 
   }
 
@@ -66,8 +71,18 @@ export class MainPageComponent implements OnInit{
 
   addReview(newReview: reviewType){
     
+    console.log(this.listOfReviews)
     this.listOfReviews.push(newReview);
-    localStorage.setItem("listOfReviews",JSON.stringify(this.listOfReviews as any));
+    this.http.post("http://localhost:3000/reviews", newReview).subscribe(()=>({ error: () => {
+      console.log('nie dodano nowego użytkownika');
+    },
+
+    // next: (res: any) => {
+    //   console.log(res);
+    // },
+  
+  }));
+    // localStorage.setItem("listOfReviews",JSON.stringify(this.listOfReviews as any));
   }
 
   showStarsX(rationInt: number): starType[]{
@@ -120,8 +135,16 @@ export class MainPageComponent implements OnInit{
 
     this.listOfReviews.splice(revIndex,1);
     console.log(this.listOfReviews);
-    localStorage.removeItem("listOfReviews");
-    localStorage.setItem("listOfReviews",JSON.stringify(this.listOfReviews as any));
+    // localStorage.removeItem("listOfReviews");
+    // localStorage.setItem("listOfReviews",JSON.stringify(this.listOfReviews as any));
+
+    this.http.delete("http://localhost:3000/reviews/"+revirewToDel.id).subscribe(()=>{
+
+    })
+
+    // writeFileSync("http://localhost:3000/reviews", JSON.stringify(this.listOfReviews), {
+    //   flag: 'w',
+    // });
 
   }
 

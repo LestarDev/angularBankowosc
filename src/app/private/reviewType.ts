@@ -9,7 +9,9 @@ type reviewType = {
     rate: number,
     byWho: string,
     idWho: string,
-    date: string | null
+    date: string | null,
+    email: string,
+    id: string
 }
 
 export default reviewType

@@ -1,0 +1,40 @@
+{
+  "reviews": [
+    {
+      "id": "0",
+      "data": "Przykladowa opinia",
+      "rate": 10,
+      "byWho": "Anonim",
+      "idWho": 0,
+      "date": "2024-04-15",
+      "email": "email@exmaple.com"
+    },
+    {
+      "id": "b6a6",
+      "byWho": "Mateusz Borkowski",
+      "data": "XXX",
+      "idWho": "108183614549906704907",
+      "rate": "10",
+      "date": "2024-04-15",
+      "email": "m.borkowski.2005@gmail.com"
+    },
+    {
+      "id": "138e",
+      "byWho": "Mateusz Borkowski",
+      "data": "thjrthjrt",
+      "idWho": "108183614549906704907",
+      "rate": "10",
+      "date": "2024-04-15",
+      "email": "m.borkowski.2005@gmail.com"
+    },
+    {
+      "id": 1713176168381,
+      "byWho": "Mateusz Borkowski",
+      "data": "dfhbtf",
+      "idWho": "108183614549906704907",
+      "rate": "10",
+      "date": "2024-04-15",
+      "email": "m.borkowski.2005@gmail.com"
+    }
+  ]
+}

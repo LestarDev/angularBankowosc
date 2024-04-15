@@ -7,6 +7,7 @@ import reviewType, { starType } from '../../private/reviewType';
 import "./form-reviews.component.css"
 import { DataFlowService } from '../../service/data-flow.service';
 
+
 @Component({
   selector: 'app-form-reviews',
   standalone: true,
@@ -102,7 +103,9 @@ export class FormReviewsComponent {
       data: "",
       idWho: this.dataFlow.getUserApp().id,
       rate: 10,
-      date: this.todayDate
+      date: this.todayDate,
+      email: this.dataFlow.getUserApp().email,
+      id: ((((new Date()).getTime()) as unknown) as string)
     }
 
     review.data=textReview.replace("\n", "<br/>");
