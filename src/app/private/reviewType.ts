@@ -11,7 +11,6 @@ type reviewType = {
     idWho: string,
     date: string | null,
     email: string,
-    id: string
 }
 
 export default reviewType

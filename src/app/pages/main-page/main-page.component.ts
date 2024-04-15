@@ -138,7 +138,7 @@ export class MainPageComponent implements OnInit{
     // localStorage.removeItem("listOfReviews");
     // localStorage.setItem("listOfReviews",JSON.stringify(this.listOfReviews as any));
 
-    this.http.delete("http://localhost:3000/reviews/"+revirewToDel.id).subscribe(()=>{
+    this.http.delete("http://localhost:3000/reviews/"+(revirewToDel as any).id).subscribe(()=>{
 
     })
 

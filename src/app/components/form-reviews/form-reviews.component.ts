@@ -105,7 +105,6 @@ export class FormReviewsComponent {
       rate: 10,
       date: this.todayDate,
       email: this.dataFlow.getUserApp().email,
-      id: ((((new Date()).getTime()) as unknown) as string)
     }
 
     review.data=textReview.replace("\n", "<br/>");
