@@ -7,6 +7,7 @@ import { Observable, filter } from 'rxjs';
 import { DataFlowService } from '../../service/data-flow.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import apiUsers, { apiUser } from '../../private/fewUsersFromApi';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class LoginPageComponent implements OnInit {
     private socialAuthService: SocialAuthService,
     public router: Router,
     public dataFlow: DataFlowService,
-    private http: HttpClient
+    private http: HttpClient,
+    private cookieService: CookieService
   ) {
     this.navStart = router.events.pipe(
       filter(evt => evt instanceof NavigationStart)
@@ -39,6 +41,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cookieService.deleteAll();
     // this.dataFlow.setUserApp(true)
     this.navStart.subscribe(()=> console.log("Sub on"))
     this.loginForm = this.formBuilder.group({

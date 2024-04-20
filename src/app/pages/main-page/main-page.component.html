@@ -1,7 +1,7 @@
 <div class="container mt-3">
   <div class="d-flex justify-content-between">
 
-    <div class="w-100">
+    <div class="w-100 d-flex flex-column justify-content-between  ">
       <div class="form-group">
         <label>First Name</label>
         <app-input-login [data]="this.dataFlow.getUserApp().name" />
@@ -19,14 +19,14 @@
 
     </div>
 
-    <div class="pt-1 px-3">
-      <img [ngStyle]="{'width': '100px'}" class="rounded border" [src]="this.dataFlow.getUserApp().imgLink" alt="user avatar">
+    <div class="pt-1 px-3 w-50 d-flex flex-row-reverse">
+      <img [ngStyle]="{'width': '100px'}" class="rounded border w-100 " [src]="this.dataFlow.getUserApp().imgLink" alt="user avatar">
     </div>
   </div>
 
   <button type="button" (click)="logOut()" [ngClass]="this.dataFlow.getUserApp().isGoogleUser ? 'btn-outline-primary' : 'btn-outline-secondary' " class="btn">Log Out</button>
 
-  <div class="d-flex">
+  <div class="d-flex mt-4">
     <app-form-reviews (newReviewEmitter)="addReview($event)" />
     <div class="w-100">
       <div *ngFor="let singleReview of listOfReviews; let iNx = index" class="rounded mx-2 my-2 border border-dark px-2 py-2 w-100">
