@@ -64,7 +64,7 @@ export class MainPageComponent implements OnInit{
     this.dataFlow.resetUserApp();
     this.router.navigate(['/login']).then(()=>{
       this.socialAuthService.signOut()
-      this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID).then(()=>{this.router.navigate(['/login'])})
+      this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID).then(()=>{this.router.navigate(['/login']); this.socialAuthService.refreshAccessToken(GoogleLoginProvider.PROVIDER_ID)})
     });
 
   }

@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-Run `cd src/app/prviate` for move to location with json file server.
+Run `cd src/app/private` for move to location with json file server.
 Run `npx json-server reviews.json` to run local json server.
 
 ## Autor: Mateusz Borkowski

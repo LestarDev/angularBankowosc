@@ -92,7 +92,7 @@ export class LoginPageComponent implements OnInit {
       if(!user) {this.invalidForm(); return};
       if(user.username!=login) {this.invalidForm(); return};
       this.isInvalidForm=false;
-      this.dataFlow.setUserWithoutGoogle(user.email, user.firstName, user.maidenName, user.image,user.id);
+      this.dataFlow.setUserWithoutGoogle(user.email, user.firstName, user.lastName, user.image,user.id);
       // console.log(user);
       this.router.navigate(['/loged']);
     });

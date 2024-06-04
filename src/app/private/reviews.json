@@ -35,6 +35,15 @@
       "rate": "4",
       "date": "2024-04-20",
       "email": "m.borkowski.2005@gmail.com"
+    },
+    {
+      "id": "1307",
+      "byWho": "Michael Williams",
+      "data": "",
+      "idWho": 2,
+      "rate": "10",
+      "date": "2024-06-04",
+      "email": "michael.williams@x.dummyjson.com"
     }
   ]
 }
